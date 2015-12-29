@@ -1,0 +1,108 @@
+
+/* 
+    Created on : Apr 9, 2015, 6:04:55 PM
+    Author     : Michael
+*/
+#leftPane{
+    height: auto;
+    width: 700px;
+    float: left;    
+}
+
+#rightPane{
+    height: auto;
+    width: auto;
+    float: left;    
+    margin-left: 20px;
+    margin-top: 0px;
+    font-size: 110%;    
+}
+
+#topTitle{
+    height: 40px;
+    width: 100%;        
+}
+
+[id*="Message"]{
+    margin-top: 10px;
+    margin-right: 20px;
+    height: 40px;
+    width: 175px;        
+    float: left;    
+    font-size: 100%;   
+}
+
+[id*="Picker"]{
+    margin-top: 10px;
+    height: 40px;
+    width: 175px;        
+    font-size: 80%;   
+}
+
+[id$="Dynamic"]{
+    margin-top: 10px;
+    height: 40px;
+    width: 175px;        
+    font-size: 100%;   
+    float: left;
+}
+
+[id$="Span"]{
+    height: 50px;
+    width: auto;        
+}
+
+#startStop{    
+    height: 30px;
+    font-size: 100%;    
+}
+
+
+#bottomPane{
+    margin: 0px;
+    height: auto;
+    
+}
+#passcodeDiv
+{
+    margin-left: 10px;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+#passcodeInput
+{
+    color: gray;
+}
+
+th, td{
+    background-color: lightgreen;
+    border: 1px solid lightgray;
+    border-collapse: collapse;
+    text-align: center;
+    width: 65px;
+}
+
+th {
+    font-weight: bold;
+    font-size: 90%;    
+}
+
+td {
+    font-weight: normal;
+    font-size: 80%;    
+}
+
+.progressButton{
+    background-color: lightblue;
+    height: 50px;
+    width: 110px;
+    font-size: 14px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+#insulationDisplay{
+    height: 210px;
+    width: auto;    
+}
