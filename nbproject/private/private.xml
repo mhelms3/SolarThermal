@@ -4,13 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/styleSheet.css</file>
-            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/insulation.js</file>
-            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/utils.js</file>
+            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/solarThermal.php</file>
+            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/buttonBehaviors.js</file>
+            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/simpleObjects.js</file>
             <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/drawScene.js</file>
             <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/main.js</file>
-            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/solarThermal.php</file>
-            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/simpleObjects.js</file>
-            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/buttonBehaviors.js</file>
+            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/utils.js</file>
+            <file>file:/C:/Users/Michael/Documents/NetBeansProjects/SolarThermal/jsFiles/insulation.js</file>
         </group>
     </open-files>
 </project-private>
