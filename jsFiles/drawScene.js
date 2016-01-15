@@ -22,7 +22,7 @@ function initialScreen (context, screen)
           context.fillText("Click on a button below to begin.", 200, 390);
           context.fillStyle = 'blue';
           
-          context.fillText("*TEST ONLY* To unlock all of the buttons below, enter passcode 'five' *TEST ONLY*", 100, 420);
+          context.fillText("*TEST ONLY* To unlock all of the buttons below, enter passcode 'ROBERT FROST' *TEST ONLY*", 100, 420);
           context.fillText("     The passcode will change, and this message will go away when we go live.", 100, 435);
   context.restore();
  }

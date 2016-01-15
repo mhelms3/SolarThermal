@@ -130,16 +130,16 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                     var strng = this.value;
                     var inputString = strng.toUpperCase();
                     switch (inputString) {
-                    case "TWO":
+                    case "PATH":
                         checkPasscode(2);
                         break;
-                    case "THREE":
+                    case "LESS":
                         checkPasscode(3);
                         break;
-                    case "FOUR":
+                    case "TRAVELED":
                         checkPasscode(4);
                         break;
-                    case "FIVE":
+                    case "ROBERT FROST":
                         checkPasscode(5);
                         break;
                     default:

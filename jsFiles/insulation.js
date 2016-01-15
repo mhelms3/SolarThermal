@@ -125,6 +125,7 @@ insulation.prototype.drawInsulation = function(context)
         var color = this.colors[this.choice-1];
         var splitThick = Math.floor(thick/2);
     
+    
     context.save();
         context.lineWidth = thick;
         context.strokeStyle = color;
@@ -142,37 +143,39 @@ insulation.prototype.drawInsulation = function(context)
     //drawCrossSection
     iContext = this.insulationContext;
     
-    iContext.save();
-        
+    
+    iContext.save();        
         iContext.rect(0,0,400,300);    
         iContext.fillStyle = "white";
         iContext.fill();
-        
         iContext.translate(100, 100);
+        
+        //Pipe
         iContext.beginPath();
             iContext.arc(0,0,30,0,2*Math.PI);
             iContext.strokeStyle = "gray";
             iContext.lineWidth = 10;
         iContext.stroke();
         
-        
-        
-        
-        
         var insulationHeight = thick*6;
         var radius= 35+insulationHeight/2;
         iContext.lineWidth = insulationHeight;
         iContext.strokeStyle = color;
-        iContext.setLineDash([0]);
+        
+    
+        iContext.setLineDash([]);
+    
+        
         iContext.beginPath();
             iContext.arc(0,0,radius,0,2*Math.PI);
         iContext.stroke();
-
-    
-        
+       
         iContext.lineWidth = 1;
         iContext.strokeStyle = "black";
+       
         iContext.setLineDash([3]);
+    
+        //Pipe void
         iContext.beginPath();
             iContext.arc(0,0,5,0,2*Math.PI);
         iContext.stroke();
@@ -187,7 +190,7 @@ insulation.prototype.drawInsulation = function(context)
             iContext.lineTo(150, -35-insulationHeight);
         iContext.stroke();
         
-        iContext.font = "10px Rockwell";
+        iContext.font = "16px Rockwell";
         iContext.fillStyle = "black";
         iContext.fillText("pipe diameter, 10cm", 120, 5);
         var message = " cm";

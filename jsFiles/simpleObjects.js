@@ -30,15 +30,18 @@ var screenObject = function(bh, bw){
         
         this.houseDarkImage = new Image();
         //this.houseDarkImage.src = "imageFiles/LED-OFF3.png";
-        this.houseDarkImage.src = "imageFiles/ButtonGreenOff.png";
+        //this.houseDarkImage.src = "imageFiles/ButtonGreenOff.png";
+        this.houseDarkImage.src = "imageFiles/HouseGray.png";
         
         this.houseLightImage = new Image();
         //this.houseLightImage.src = "imageFiles/LED-ON3.png";
-        this.houseLightImage.src = "imageFiles/ButtonGreen.png";
+        //this.houseLightImage.src = "imageFiles/ButtonGreen.png";
+        this.houseLightImage.src = "imageFiles/HouseGreen.png";
         
         this.houseFlickerImage = new Image();
         //this.houseFlickerImage.src = "imageFiles/LED-OFF3.png";
-        this.houseFlickerImage.src = "imageFiles/ButtonYellow.png";
+        //this.houseFlickerImage.src = "imageFiles/ButtonYellow.png";
+        this.houseFlickerImage.src = "imageFiles/HouseYellow.png";
         
         this.bladeImage = new Image();
         this.bladeImage.src = "imageFiles/FANBLADES_4.png";
@@ -101,7 +104,7 @@ screenObject.prototype.resetBlades = function()
 };
 
 var flags = function(){
-    this.passcode = 5;
+    this.passcode = 0;
     this.displayRightFlag = false;
     this.showInsulation = false;
     this.animationFlag = false;
