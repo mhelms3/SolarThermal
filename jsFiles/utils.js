@@ -66,7 +66,7 @@ function displayPercent(context, percent, randomMode)
     percent = Math.round(percent*1000);
     percent = percent/10;
     context.save();
-        textString = "Generator Efficiency ";
+        textString = "Generator Capacity ";
         textString += percent;
         textString += "%"; 
         context.font = "14px Rockwell";

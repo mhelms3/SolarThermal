@@ -14,7 +14,8 @@
     $locationText = array("Napuu Village, Kenya", "Upington, South Africa", "Smara, Morroco", "Atlanta, USA", "London, UK", );
     $locationRows = count($locationText);
     
-    $capacityText = array("10%","20%","30%","40%","50%","60%","70%");
+    //$capacityText = array("10%","20%","30%","40%","50%","60%","70%");
+    $capacityText = array("10%","20%","30%","40%","50%");
     $capacityRows = count($capacityText);
     
     
@@ -137,9 +138,9 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
             </canvas>
             <div id="bottomPane">
 
-                <button class ="progressButton" id="scenario1" >1. Powering Houses</button>
+                <button class ="progressButton" id="scenario1" >1. Generator Capacity</button>
                 <button class ="progressButton" id="scenario2" disabled="disabled">2. Testing Insulation I</button>
-                <button class ="progressButton" id="scenario3" disabled="disabled">3. Testing Insulation II</button>
+                <button class ="progressButton" id="scenario3" disabled="disabled" style="display:none;" >3. Testing Insulation II</button>
                 <button class ="progressButton" id="scenario4" disabled="disabled" style="display:none;" >4. New Environments</button>
                 <button class ="progressButton" id="scenario5" disabled="disabled" style="display:none;" >5. Costs and Decisions</button>
             </div>

@@ -22,8 +22,8 @@ function initialScreen (context, screen)
           context.fillText("Click on a button below to begin.", 200, 390);
           context.fillStyle = 'blue';
           
-          context.fillText("*TEST ONLY* To unlock all of the buttons below, enter passcode 'ROBERT FROST' *TEST ONLY*", 100, 420);
-          context.fillText("     The passcode will change, and this message will go away when we go live.", 100, 435);
+          //context.fillText("*TEST ONLY* To unlock all of the buttons below, enter passcode 'ROBERT FROST' *TEST ONLY*", 100, 420);
+          //context.fillText("     The passcode will change, and this message will go away when we go live.", 100, 435);
   context.restore();
  }
  
@@ -32,10 +32,10 @@ function initialScreen (context, screen)
      context.save();
         context.drawImage(screen.controlPanelImage, screen.lightArrayLeft-15, screen.lightArrayTop-35, 245, 335);
         context.fillStyle = "#00BD5C";
-        context.font = "20px Rockwell";
-        context.fillText("Houses Powered", screen.lightArrayLeft+35, screen.lightArrayTop-5);
+        context.font = "16px Rockwell";
+        context.fillText("Houses Powered(x1000)", screen.lightArrayLeft+35, screen.lightArrayTop-5);
         context.fillStyle = "#003313";
-        context.fillText("Houses Powered", screen.lightArrayLeft+34, screen.lightArrayTop-4);
+        context.fillText("Houses Powered(x1000)", screen.lightArrayLeft+34, screen.lightArrayTop-4);
      context.restore();
  }
  

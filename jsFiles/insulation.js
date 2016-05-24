@@ -47,8 +47,11 @@ insulation.prototype.initCosts = function()
  //("Mud", "Hay/Grass", "Wood", "Adobe", "Brick", "Fiberglass", "Vacuum Panels", "Aerogels");
 insulation.prototype.initR_values = function()
 {
-    this.R_value = [0.035,0.0125,0.025,0.06,0.0475,0.1,0.1475,0.225];
-    this.linearStop = [8,8,7,8,7,6,5,3];
+    this.R_value = [0.035,0.0125,0.025,0.06,0.0475,0.1,0.1475,0.172];
+    //this.linearStop = [8,8,7,8,7,6,5,3];
+    //this was changed to make Aeorgels linear at 1 through 5 (previously it was linear at 1 -3)
+    //maybe should change R-value of Aeorgels so that it doesn't cap out so fast.
+    this.linearStop = [8,8,7,8,7,6,5,5];
 };
 
 insulation.prototype.getChoice = function()
@@ -89,7 +92,7 @@ insulation.prototype.calculateHeatRetained = function()
     var heatRetained = 0;
     if (nonLinearThickness>0)
     {
-        Math.e
+        //Math.e
         var factor = (1-(1/(Math.pow(2,nonLinearThickness))));
         linearHeatRetained = this.linearStop[this.choice-1] * this.R_value[this.choice-1];
         nonLinearHeatRetained = this.R_value[this.choice-1] * factor;
@@ -101,6 +104,10 @@ insulation.prototype.calculateHeatRetained = function()
     }
     //console.log(this.thickness, nonLinearThickness, this.R_value[this.choice-1], linearHeatRetained, nonLinearHeatRetained, factor);
     heatRetained = 0.1 + linearHeatRetained + nonLinearHeatRetained;    
+    
+    //THIS CAPS HEAT RETAINED AT 100% -- nothing should really reach this, but this was added because of the changes to make everything linear for 1-5" of insulation.
+    if (heatRetained>1)
+        heatRetained = 1;
     return(heatRetained);
     
 };

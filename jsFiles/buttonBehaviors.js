@@ -130,17 +130,17 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                     var strng = this.value;
                     var inputString = strng.toUpperCase();
                     switch (inputString) {
-                    case "PATH":
+                    case "SOLAR":
+                        checkPasscode(1);
+                        break;
+                    case "THERMAL":
                         checkPasscode(2);
                         break;
-                    case "LESS":
+                    case "ENERGY":
                         checkPasscode(3);
                         break;
-                    case "TRAVELED":
+                    case "RENEWABLE":
                         checkPasscode(4);
-                        break;
-                    case "ROBERT FROST":
-                        checkPasscode(5);
                         break;
                     default:
                         this.style.color = "blue";  
