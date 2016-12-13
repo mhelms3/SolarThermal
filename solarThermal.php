@@ -15,7 +15,8 @@
     $locationRows = count($locationText);
     
     //$capacityText = array("10%","20%","30%","40%","50%","60%","70%");
-    $capacityText = array("10%","20%","30%","40%","50%");
+    //$capacityText = array("10%","20%","30%","40%","50%");
+    $capacityText = array("10%","20%","30%");  ///changed 12-13-16
     $capacityRows = count($capacityText);
     
     
@@ -26,9 +27,9 @@
     $insulationText = array("Mud", "Grass", "Wood", "Adobe", "Brick", "Fiberglass", "Vacuum Panels", "Aerogels");
     $insultationRows = count($insulationText);
     
-    $thicknessText = array(1,2,3,4,5,6,7,8,9,10);
-    $thicknessRows1 = 5;
-    $thicknessRows2 = 10;
+    $thicknessText = array(0,1,2,3,4,5,6,7,8,9,10);
+    $thicknessRows1 = 6;
+    $thicknessRows2 = 11;
     
     $insulationTableID = "insulationData";
     $insulationTableLabels = array("i", "c","ht","hl", "eg","el", "houses");
@@ -99,7 +100,7 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
         echo($listIDs);
         echo($i+1);
         echo('" value=');
-        echo($i+1);
+        echo($i);
         echo(">");
         echo($listText[$i]);
         echo("</option>");
