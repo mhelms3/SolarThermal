@@ -160,9 +160,8 @@ function animateHouse(context, screen, percent, count, column, insulation, myFla
     {
         if(myFlags.showInsulation)
             manageChevrons(context, screen, count);
-        manageBlades(context, screen);
     }
-     
+    
     if(myFlags.animationFlag)
     {
         setTimeout(function()
@@ -182,7 +181,10 @@ function animateHouse(context, screen, percent, count, column, insulation, myFla
 
             count++;
             if (count < rowCount)
+            {
+                manageBlades(context, screen);
                 animateHouse(context, screen, percent, count, column, insulation, myFlags);
+            }
             else
                 animateFinal(context, screen, percent, count, insulation, myFlags);
         }, screen.delay);
@@ -202,26 +204,34 @@ function beginAnimation (context, screen, timeSteps, percent, insulation, myFlag
 
             if(myFlags.showInsulation)
                 manageChevrons(context, screen, timeSteps);
-            manageBlades(context, screen);
-            drawPowerBoard(context, screen)
+            
+            drawPowerBoard(context, screen);
             if (timeSteps<timeMax-1)
                 displayPercent(context, myFlags.genPercent, true);
             else
                 displayPercent(context, myFlags.genPercent, false);
+           
             for(i=0; i<10; i++)
+            {
+                manageBlades(context, screen);
                 for(j=0; j<12; j++)
                 {
                     lightBulb(context, screen, i, j, "rand");
                 }
-                timeSteps+=1;
-
-                if (timeSteps<timeMax)
-                    beginAnimation(context, screen, timeSteps, percent, insulation, myFlags);
-                else
+            }
+                
+            timeSteps+=1;
+            if (timeSteps<timeMax)
+            {
+                beginAnimation(context, screen, timeSteps, percent, insulation, myFlags);
+            }
+            else
+            {
+                for (ifor=0; ifor< 12; ifor++)
                 {
-                    for (ifor=0; ifor< 12; ifor++)
-                        animateHouse(context, screen, percent, 0, ifor, insulation, myFlags);
+                    animateHouse(context, screen, percent, 0, ifor, insulation, myFlags);
                 }
+            }
         }, screen.delay);
     }
 }

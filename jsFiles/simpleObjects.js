@@ -74,7 +74,10 @@ var screenObject = function(bh, bw){
      
 screenObject.prototype.setMaxSpeed = function(percent)
 {
-    this.bladeMaxSpeed = (percent * Math.PI *2)/10000;
+    console.log("%"+percent);
+    var factor = 1+percent/100;
+    
+    this.bladeMaxSpeed = (percent * Math.PI *factor*factor*factor)/60000;
 };
 
 screenObject.prototype.clearChevrons = function()

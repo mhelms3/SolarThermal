@@ -16,7 +16,7 @@
     
     //$capacityText = array("10%","20%","30%","40%","50%","60%","70%");
     //$capacityText = array("10%","20%","30%","40%","50%");
-    $capacityText = array("10%","20%","30%");  ///changed 12-13-16
+    $capacityText = array("Off", "10%","20%","30%");  ///changed 12-13-16
     $capacityRows = count($capacityText);
     
     
