@@ -13,6 +13,15 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                         document.getElementById('rightPane').style.display = "none";  
                 }
                 
+                calculateCost.addEventListener('click', function(evt){
+                    //drawBackground(context, myScreen, myFlags);
+                    //myScreen.clearChevrons();
+                    //myScreen.resetBlades();
+                    //initHouses(context, myScreen);
+                    updateInsulationCost(myInsulation, true);
+                    
+                }, false);
+                
                 startStop.addEventListener('click', function(evt) {       
                         myFlags.animationFlag = !myFlags.animationFlag;
                         myFlags.connectFlag = !myFlags.connectFlag;
@@ -49,7 +58,8 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                         
                         housePercent = genPowerToHouses(myFlags.genPercent);
                         powerHouses(context, myScreen, housePercent, myInsulation, myFlags);
-                    }, false);
+                    }, false);            enableStuff(myFlags);
+                  
                     
                 fillTable.addEventListener('click', function(evt) {                                  
                      cheatCalculateSim(myInsulation, myCityLocation);
@@ -65,22 +75,21 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                     myInsulation.choice = document.getElementById('insulationPicker').value;   
                     drawSceneOne(context, myScreen, myFlags);
                     myInsulation.drawInsulation(context);
-                    updateCost(myInsulation, myCityLocation);
-                    updateTitleRow(myInsulation, myCityLocation);
+                    updateInsulationCost(myInsulation, false);
                 }, false);
                 
                 thicknessPicker1.addEventListener('change', function(evt) {            
                     myInsulation.thickness = document.getElementById('thicknessPicker1').value;   
                     drawSceneOne(context, myScreen, myFlags);
                     myInsulation.drawInsulation(context);
-                    updateVolume(myInsulation, myFlags);
+                    updateInsulationCost(myInsulation, false);
                 }, false);
                 
                 thicknessPicker2.addEventListener('change', function(evt) {            
                     myInsulation.thickness = document.getElementById('thicknessPicker2').value;   
                     drawSceneOne(context, myScreen, myFlags);
-                    myInsulation.drawInsulation(context);
-                    updateVolume(myInsulation, myFlags);
+                    myInsulation.drawInsulation(context);       
+                    updateInsulationCost(myInsulation, false);
                 }, false);
                 
                 function clearColumn(column, rows)
@@ -181,7 +190,9 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                     
                 }, false);
                 
+                
                 ///insulation 1-10cm
+                /*
                 scenario3.addEventListener('click', function(evt) {
                     myFlags.displayRightFlag = true;
                     myFlags.showInsulation = true;
@@ -199,13 +210,38 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                     myInsulation.drawInsulation(context);
                     
                 }, false);
+                */
                 
-                //helmet Sim
-                scenario4.addEventListener('click', function(evt) {
-                   myFlags.displayRightFlag = false;
+                ///cost calculator
+                
+                scenario3.addEventListener('click', function(evt) {
+                   myFlags.displayRightFlag = true;
+                   myFlags.showInsulation = true;
+                   myFlags.pickerIndicator = 1;
                    checkVisible(myFlags); 
+                   clearAllElements();
+                   document.getElementById('capacityMessage').innerHTML = "Generator capacity depends on heat received";  
+                   document.getElementById('variableTitle').innerHTML = "<h3>Calculating Insulation Costs </h3>"; 
+                   document.getElementById('insulationSpan').style.display = "block";  
+                   document.getElementById('thicknessSpan1').style.display = "block";  
+                   document.getElementById('insulationDisplay').style.display = "block";  
+                   document.getElementById('calculateCostSpan').style.display = "inline";  
+                   document.getElementById('insulationCostSpan').style.display = "block";  
+                   
+                   $( "#calculateCost").removeAttr('disabled');   
+                   myInsulation.choice = document.getElementById('insulationPicker').value;
+                   myInsulation.thickness = document.getElementById('thicknessPicker1').value;
+                   drawSceneOne(context, myScreen, myFlags);
+                   myInsulation.drawInsulation(context);
+                    
                 }, false);
                 
+                
+                scenario4.addEventListener('click', function(evt) {
+                    myFlags.displayRightFlag = false;
+                    checkVisible(myFlags);
+                    
+                }, false);
                 
                  scenario5.addEventListener('click', function(evt) {
                     myFlags.displayRightFlag = false;

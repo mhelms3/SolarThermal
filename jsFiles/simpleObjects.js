@@ -61,12 +61,15 @@ var screenObject = function(bh, bw){
         this.chevronImages[1].src = "imageFiles/HeatChevron3.png";
         this.chevronImages[2].src = "imageFiles/HeatChevron1.png";
         
+        this.temperatureBarImage = new Image();
+        this.temperatureBarImage.src = "imageFiles/TempGradient.png";
                 
         this.backGroundImage = [];
         this.backGroundImage[0] = new Image();
         this.backGroundImage[0].src = "imageFiles/STATIC-BACKGROUND-NOSUN.png";
         this.backGroundImage[1] = new Image();
         this.backGroundImage[1].src = "imageFiles/STATIC-BACKGROUND.png";
+        
 
         
         this.altLabel = "";

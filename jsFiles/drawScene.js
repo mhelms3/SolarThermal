@@ -30,12 +30,15 @@ function initialScreen (context, screen)
  function drawPowerBoard(context, screen)
  {
      context.save();
-        context.drawImage(screen.controlPanelImage, screen.lightArrayLeft-15, screen.lightArrayTop-35, 245, 335);
+        //context.drawImage(screen.controlPanelImage, screen.lightArrayLeft-15, screen.lightArrayTop-35, 245, 335);
+        context.drawImage(screen.controlPanelImage, screen.lightArrayLeft-15, screen.lightArrayTop-80, 245, 380);
         context.fillStyle = "#00BD5C";
         context.font = "16px Rockwell";
-        context.fillText("Houses Powered(x1000)", screen.lightArrayLeft+35, screen.lightArrayTop-5);
+        context.fillText("Houses Powered(x1000)", screen.lightArrayLeft+18, screen.lightArrayTop-5);
         context.fillStyle = "#003313";
-        context.fillText("Houses Powered(x1000)", screen.lightArrayLeft+34, screen.lightArrayTop-4);
+        context.fillText("Houses Powered(x1000)", screen.lightArrayLeft+17, screen.lightArrayTop-4);
+        
+        //context.fillText("Excess Capacity(kWH)", screen.lightArrayLeft+34, screen.lightArrayTop-40);
      context.restore();
  }
  
@@ -202,6 +205,7 @@ function beginAnimation (context, screen, timeSteps, percent, insulation, myFlag
         setTimeout(function()
         {
 
+            //console.log("%%"+percent);
             if(myFlags.showInsulation)
                 manageChevrons(context, screen, timeSteps);
             
@@ -209,7 +213,11 @@ function beginAnimation (context, screen, timeSteps, percent, insulation, myFlag
             if (timeSteps<timeMax-1)
                 displayPercent(context, myFlags.genPercent, true);
             else
+            {
                 displayPercent(context, myFlags.genPercent, false);
+                if(percent>120)
+                    displayOverage(context, percent);
+            }
            
             for(i=0; i<10; i++)
             {

@@ -8,6 +8,7 @@ var insulation = function(context){
     ///need to account for a choice of "0" thickness -- currently screwing up, pipe graphics and insulation color, and maybe calculations
     this.insulationNames = [];
     this.cost = [];
+    this.totalCost = 0;
     this.R_value = [];
     this.linearStop = [];
     this.choice = 0;
@@ -39,13 +40,21 @@ insulation.prototype.initNames = function()
 insulation.prototype.initCosts = function()
 {
     this.cost[0] = [0.000, 0.000, 0.00, 0.00, 0.0, 0.0, 0, 0.0];
-    this.cost[1] = [0.001, 0.003, 0.01, 0.03, 0.4, 0.7, 2.2, 14.0];
+    this.cost[1] = [0.001, 0.003, 0.02, 0.05, 0.05, 0.2, .5, .6];
     this.cost[2] = [0.002, 0.004, 0.02, 0.04, 0.5, 0.8, 2.3, 14.1];
     this.cost[3] = [0.003, 0.005, 0.03, 0.05, 0.6, 0.9, 2.4, 14.2];
     this.cost[4] = [0.004, 0.006, 0.04, 0.06, 0.7, 1.0, 2.5, 14.3]; 
-    this.cost[5] = [0.005, 0.007, 0.05, 0.07, 0.8, 1.1, 2.6, 14.4]; 
+    this.cost[5] = [0.005, 0.007, 0.05, 0.05, 0.8, 1.1, 2.6, 14.4]; 
 };    
  
+insulation.prototype.calculateTotalCost = function()
+{
+    r = this.thickness;
+    k = this.cost[1][this.choice];
+    this.totalCost = (400 + (Math.PI*k*(r*r+(r*20))))*1000;
+    //console.log("Radius:"+ r +"  Insulation Cost:"+k + "  Total Cost"+ this.totalCost);    
+};
+
  //("Mud", "Hay/Grass", "Wood", "Adobe", "Brick", "Fiberglass", "Vacuum Panels", "Aerogels");
 insulation.prototype.initR_values = function()
 {

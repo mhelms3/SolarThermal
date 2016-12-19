@@ -52,8 +52,10 @@
     width: auto;        
 }
 
-#startStop{    
+#startStop, #calculateCost{    
     height: 30px;
+    width: 180px;
+    margin-right: 10px;
     font-size: 100%;    
 }
 

@@ -141,7 +141,7 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
 
                 <button class ="progressButton" id="scenario1" >1. Generator Capacity</button>
                 <button class ="progressButton" id="scenario2" disabled="disabled">2. Testing Insulation I</button>
-                <button class ="progressButton" id="scenario3" disabled="disabled" style="display:none;" >3. Testing Insulation II</button>
+                <button class ="progressButton" id="scenario3" disabled="disabled">3. Cost Calculations</button>
                 <button class ="progressButton" id="scenario4" disabled="disabled" style="display:none;" >4. New Environments</button>
                 <button class ="progressButton" id="scenario5" disabled="disabled" style="display:none;" >5. Costs and Decisions</button>
             </div>
@@ -185,10 +185,12 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
                 ?>
             </div>
             
+            <!--
             <div id="insulationCostSpan" class="hidable" style="display:none;">
                 <text id="costMessage">Cost per cubic foot:</text>
                 <div id="insulationCostDynamic">Material cost per cubic foot</div>
             </div>
+            -->
             
             <div id="thicknessSpan1" class="hidable" style="display:none;">
                 <text id="thicknessMessage1">Choose insulation amount (cm)</text>
@@ -205,15 +207,19 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
             </div>
             
             
-            <div id="insulationVolumeSpan" class="hidable" style="display:none;">
-                <text id="volumeMessage">Number of cubic feet required:</text>
-                <div id="insulationVolumeDynamic">Formula for surrounding a 12" pipe, with n" of insulation</div> 
+            <div id="insulationCostSpan" class="hidable" style="display:none;">
+                <text id="insulationCostMessage">Total Cost ($):</text>
+                <text id="insulationCostDynamic">[click Calculate Cost to get cost]</text> 
             </div>
             
             <br>
             <br>
            
             <button id="startStop">Connect the Power</button>
+            
+            <span id="calculateCostSpan" class="hidable" style="display:none;">
+                <button id="calculateCost">Calculate Cost</button>
+            </span>
 
             <br>
             <br>

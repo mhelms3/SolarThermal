@@ -22,9 +22,9 @@ function init(context, myCityLocation, myInsulation, myScreen, myFlags){
     
 function updateCost(myInsulation, myCityLocation)
 {
-    myCityLocation.calculateCost(myInsulation);
-    outputText = "$ "+myCityLocation.currentCost.toFixed(2);
-    document.getElementById('insulationCostDynamic').innerHTML=outputText;
+    //myCityLocation.calculateCost(myInsulation);
+    //outputText = "$ "+myCityLocation.currentCost.toFixed(2);
+    //document.getElementById('insulationCostDynamic').innerHTML=outputText;
 };
 
 function updateTherms(myCityLocation)
@@ -46,7 +46,7 @@ function updateVolume(myInsulation, myFlags)
 {
     myInsulation.calculateVolume(myFlags.pickerIndicator);
     outputText = myInsulation.currentVolume.toFixed(2)+" cubic feet";
-    document.getElementById('insulationVolumeDynamic').innerHTML=outputText;
+    //document.getElementById('insulationVolumeDynamic').innerHTML=outputText;
     
 };
 
@@ -55,9 +55,48 @@ function updateTitleRow (myInsulation, myCityLocation)
     var cityName = myCityLocation.getName();
     var insulationName = myInsulation.getName();
     outputText = "LOCATION:"+cityName +"--->MATERIAL:" +insulationName;
-    document.getElementById('insulationDataTitleRow').innerHTML=outputText;
+    //document.getElementById('insulationDataTitleRow').innerHTML=outputText;
 };
 
+function updateInsulationCost (myInsulation, calcFlag)
+{
+    
+    if (!calcFlag)
+    {
+        outputText = "[click Calculate Cost to get cost]";
+    }
+    else if((myInsulation.choice == 0)||(myInsulation.choice == 1)||(myInsulation.choice == 2)||(myInsulation.choice == 4))
+    {
+        outputText = "cost data not available for " + myInsulation.insulationNames[myInsulation.choice];
+    }
+    else
+    {
+        myInsulation.calculateTotalCost();
+        //outputText = "$ "+ myInsulation.totalCost.toFixed(0);
+        outputText = myInsulation.totalCost.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 0, maximumFractionDigits: 0}) 
+    }
+    document.getElementById('insulationCostDynamic').innerHTML=outputText;
+}
+
+
+function displayOverage(context, percent)
+{
+    context.save();
+        var excessCapacity = (percent-120)*1000;
+        excessCapacity = Math.round(excessCapacity);
+        //excessCapacity = excessCapacity/10;
+        
+        textString = "Excess = ";
+        textString += excessCapacity;
+        textString += " houses"; 
+        context.font = "14px Rockwell";
+        context.fillStyle = "#F4F400";
+        context.fillText(textString, 472, 120);
+        context.fillStyle = "#000000";
+        context.fillText(textString, 473, 121);
+    context.restore();
+    
+}
 
 function displayPercent(context, percent, randomMode)
 {
@@ -71,9 +110,10 @@ function displayPercent(context, percent, randomMode)
         textString += "%"; 
         context.font = "14px Rockwell";
         context.fillStyle = "#00BD5C";
-        context.fillText(textString, 470, 425);
+        context.fillText(textString, 472, 425);
         context.fillStyle = "#003313";
-        context.fillText(textString, 471, 426);
+        context.fillText(textString, 473, 426);
+        
     context.restore();
 };
 
@@ -94,13 +134,16 @@ function disableStuff()
                 $( "#thicknessPicker2").attr('disabled', 'disabled');      
                 $( "#capacityPicker").attr('disabled', 'disabled');    
                 
+                
+                document.getElementById('calculateCost').disabled=true;
                 document.getElementById('clearTable').disabled=true;
                 //document.getElementById('velocityGraph').disabled=true;
                 //document.getElementById('forceGraph').disabled=true;
                 
-                document.getElementById('scenario1').disabled=true;
-                document.getElementById('scenario2').disabled=true;
-                document.getElementById('scenario3').disabled=true;
+                /** commented out***********/
+                //document.getElementById('scenario1').disabled=true;
+                //document.getElementById('scenario2').disabled=true;
+                //document.getElementById('scenario3').disabled=true;
                 document.getElementById('scenario4').disabled=true;
                 document.getElementById('scenario5').disabled=true;
                 
@@ -118,10 +161,14 @@ function enableStuff(myFlags)
                 $( "#thicknessPicker1").removeAttr('disabled');   
                 $( "#thicknessPicker2").removeAttr('disabled');   
                 $( "#capacityPicker").removeAttr('disabled');   
+                $( "#calculateCost").removeAttr('disabled');   
+
                 
                 
                 document.getElementById('clearTable').disabled=false;  
-               //document.getElementById('velocityGraph').disabled=false;                
+                //document.getElementById('calculateCost').disabled=false;  
+                //  
+                //document.getElementById('velocityGraph').disabled=false;                
                // if(myFlags.wreckageFlag)
                     //document.getElementById('forceGraph').disabled=false;
                 
@@ -129,7 +176,13 @@ function enableStuff(myFlags)
                     document.getElementById('scenario1').disabled=false;
                 if(myFlags.passcode>1)
                     document.getElementById('scenario2').disabled=false;               
-                if(myFlags.passcode>2)
+                
+    
+                /*****************************************************************/
+                 /*if(myFlags.passcode>2)
+                    document.getElementById('scenario3').disabled=false;         */
+                /*****************************************************************/
+                if(myFlags.passcode>0)
                     document.getElementById('scenario3').disabled=false;  
                 if(myFlags.passcode>3)
                     document.getElementById('scenario4').disabled=false;  
