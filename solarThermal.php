@@ -140,7 +140,7 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
             <div id="bottomPane">
 
                 <button class ="progressButton" id="scenario1" >1. Generator Capacity</button>
-                <button class ="progressButton" id="scenario2" disabled="disabled">2. Testing Insulation I</button>
+                <button class ="progressButton" id="scenario2" disabled="disabled">2. Testing Insulation</button>
                 <button class ="progressButton" id="scenario3" disabled="disabled">3. Cost Calculations</button>
                 <button class ="progressButton" id="scenario4" disabled="disabled" style="display:none;" >4. New Environments</button>
                 <button class ="progressButton" id="scenario5" disabled="disabled" style="display:none;" >5. Costs and Decisions</button>

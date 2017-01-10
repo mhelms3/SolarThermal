@@ -51,7 +51,8 @@ insulation.prototype.calculateTotalCost = function()
 {
     r = this.thickness;
     k = this.cost[1][this.choice];
-    this.totalCost = (400 + (Math.PI*k*(r*r+(r*20))))*1000;
+    //this.totalCost = (400 + (Math.PI*k*(r*r+(r*20))))*1000;
+    this.totalCost = (400 + (3.14*k*(r*r+(r*20))))*1000;
     //console.log("Radius:"+ r +"  Insulation Cost:"+k + "  Total Cost"+ this.totalCost);    
 };
 

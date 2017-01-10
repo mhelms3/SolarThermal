@@ -141,12 +141,13 @@ function disableStuff()
                 //document.getElementById('forceGraph').disabled=true;
                 
                 /** commented out***********/
-                //document.getElementById('scenario1').disabled=true;
-                //document.getElementById('scenario2').disabled=true;
-                //document.getElementById('scenario3').disabled=true;
+                document.getElementById('scenario1').disabled=true;
+                document.getElementById('scenario2').disabled=true;
+                document.getElementById('scenario3').disabled=true;
+                /** commented out***********/
+                
                 document.getElementById('scenario4').disabled=true;
                 document.getElementById('scenario5').disabled=true;
-                
                 document.getElementById('passcodeInput').disabled=true;
             };
             
@@ -176,14 +177,8 @@ function enableStuff(myFlags)
                     document.getElementById('scenario1').disabled=false;
                 if(myFlags.passcode>1)
                     document.getElementById('scenario2').disabled=false;               
-                
-    
-                /*****************************************************************/
-                 /*if(myFlags.passcode>2)
-                    document.getElementById('scenario3').disabled=false;         */
-                /*****************************************************************/
-                if(myFlags.passcode>0)
-                    document.getElementById('scenario3').disabled=false;  
+                if(myFlags.passcode>2)
+                    document.getElementById('scenario3').disabled=false;         
                 if(myFlags.passcode>3)
                     document.getElementById('scenario4').disabled=false;  
                 if(myFlags.passcode>4)
