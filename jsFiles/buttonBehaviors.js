@@ -13,7 +13,7 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                         document.getElementById('rightPane').style.display = "none";  
                 }
                 
-                calculateCost.addEventListener('click', function(evt){
+                calculateExpense.addEventListener('click', function(evt){
                     //drawBackground(context, myScreen, myFlags);
                     //myScreen.clearChevrons();
                     //myScreen.resetBlades();
@@ -48,16 +48,21 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                         {
                             myFlags.genPercent = document.getElementById('capacityPicker').value/10;   
                         }
-                        else
+                        else 
                         {
                             myInsulation.drawInsulation(context);
-                            myFlags.genPercent = myInsulation.calculateHeatRetained();
-                            if (genPercent > 1)
-                                genPercent = 1;
+                            if(!myFlags.connectFlag)
+                            {
+                                myFlags.genPercent = myInsulation.calculateHeatRetained();
+                                myScreen.updateChevrons(myFlags.genPercent);
+                                if (genPercent > 1)
+                                    genPercent = 1;
+                            }
                         }
                         
                         housePercent = genPowerToHouses(myFlags.genPercent);
                         powerHouses(context, myScreen, housePercent, myInsulation, myFlags);
+                        
                     }, false);            enableStuff(myFlags);
                   
                     
@@ -122,9 +127,10 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                 
                 function checkPasscode(n)
                 {
-                    if (n>myFlags.passcode)
+                    if(n>myFlags.passcode)
                     {
                         myFlags.passcode = n;
+                        
                         enableStuff(myFlags);
                     }
                     document.getElementById('passcodeInput').style.color = "green";  
@@ -221,12 +227,13 @@ function enableButtons(context, myCityLocation, myInsulation, myScreen, myFlags)
                    checkVisible(myFlags); 
                    clearAllElements();
                    document.getElementById('capacityMessage').innerHTML = "Generator capacity depends on heat received";  
-                   document.getElementById('variableTitle').innerHTML = "<h3>Calculating Insulation Costs </h3>"; 
+                   document.getElementById('variableTitle').innerHTML = "<h3>Calculate Insulation Expenses </h3>"; 
                    document.getElementById('insulationSpan').style.display = "block";  
                    document.getElementById('thicknessSpan1').style.display = "block";  
                    document.getElementById('insulationDisplay').style.display = "block";  
-                   document.getElementById('calculateCostSpan').style.display = "inline";  
-                   document.getElementById('insulationCostSpan').style.display = "block";  
+                   document.getElementById('calculateExpenseSpan').style.display = "inline";                     
+                   document.getElementById('fixedExpenseSpan').style.display = "inline";                     
+                   document.getElementById('insulationExpenseSpan').style.display = "block";  
                    
                    $( "#calculateCost").removeAttr('disabled');   
                    myInsulation.choice = document.getElementById('insulationPicker').value;

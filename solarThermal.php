@@ -16,7 +16,7 @@
     
     //$capacityText = array("10%","20%","30%","40%","50%","60%","70%");
     //$capacityText = array("10%","20%","30%","40%","50%");
-    $capacityText = array("Off", "10%","20%","30%");  ///changed 12-13-16
+    $capacityText = array("Off (0%)", "10%","20%","30%");  ///changed 12-13-16
     $capacityRows = count($capacityText);
     
     
@@ -149,8 +149,11 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
                 <br>
                 Enter passcode here to advance to the next level of analysis     <input type="text" id="passcodeInput" value="enter passcode">
                 <br>
-            
             </div>
+            <br>
+            <br>
+            <br>
+            Worker image courtesy <a href="https://clipartfest.com/">clipartfest.com</a>
         </div>
 
         <div id="rightPane"  style="display:none;">
@@ -179,7 +182,7 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
             </div>
             
             <div id="insulationSpan" class="hidable" style="display:none;">
-                <text id="insulationMessage">Choose insulation type</text>
+                <text id="insulationMessage1">Choose insulation type</text>
                 <?php
                     makeOptionList("insulationPicker", $insultationRows, "ip" , $insulationText, true); 
                 ?>
@@ -193,7 +196,7 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
             -->
             
             <div id="thicknessSpan1" class="hidable" style="display:none;">
-                <text id="thicknessMessage1">Choose insulation amount (cm)</text>
+                <text id="thicknessMessage2">Choose insulation amount (cm)</text>
                 <?php
                     makeOptionList("thicknessPicker1", $thicknessRows1, "tp" , $thicknessText, true); 
                 ?>
@@ -207,9 +210,13 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
             </div>
             
             
-            <div id="insulationCostSpan" class="hidable" style="display:none;">
-                <text id="insulationCostMessage">Total Cost ($):</text>
-                <text id="insulationCostDynamic">[click Calculate Cost to get cost]</text> 
+            <div id="insulationExpenseSpan" class="hidable" style="display:none;">
+                <text id="insulationExpenseMessage1">Startup expense($):</text>                
+                <text id="insulationExpenseDynamic">calculate</text> 
+            </div>
+            <div id="fixedExpenseSpan" class="hidable" style="display:none;">               
+                <text id="fixedExpenseMessage2">Annual operating expense($):</text>
+                <text id="fixedExpenseTotal"> 25,000,000</text> 
             </div>
             
             <br>
@@ -217,8 +224,8 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
            
             <button id="startStop">Connect the Power</button>
             
-            <span id="calculateCostSpan" class="hidable" style="display:none;">
-                <button id="calculateCost">Calculate Cost</button>
+            <span id="calculateExpenseSpan" class="hidable" style="display:none;">
+                <button id="calculateExpense">Calculate Expense</button>
             </span>
 
             <br>
@@ -238,7 +245,11 @@ function makeOptionList ($listName, $listLength, $listIDs, $listText, $isVisible
             
             <div id="insulationDisplay" class="hidable" style="display:none;">
                 <canvas id="insulationCanvas" width="370" height="200">
-                
+                </canvas>
+            </div>
+
+            <div id="offSCreenDisply" class="hidable" style="display:none;">
+                <canvas id="offScreenCanvas" width="200" height="200">
                 </canvas>
             </div>
             

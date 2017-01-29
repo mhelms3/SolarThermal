@@ -17,8 +17,16 @@ function init(context, myCityLocation, myInsulation, myScreen, myFlags){
             updateTitleRow(myInsulation, myCityLocation);
             disableStuff();
             enableStuff(myFlags);
-            initialScreen(context, myScreen)
+            initialScreen(context, myScreen);
+            initializeChevrons(context, myScreen);
     };
+    
+function initializeChevrons(context, myScreen)
+{
+    myScreen.newChevrons[0] = context.createImageData(10, 10);
+    myScreen.newChevrons[1] = context.createImageData(10, 10);
+    myScreen.newChevrons[2] = context.createImageData(10, 10);
+}
     
 function updateCost(myInsulation, myCityLocation)
 {
@@ -63,56 +71,123 @@ function updateInsulationCost (myInsulation, calcFlag)
     
     if (!calcFlag)
     {
-        outputText = "[click Calculate Cost to get cost]";
+        outputText = "calculate";
     }
     else if((myInsulation.choice == 0)||(myInsulation.choice == 1)||(myInsulation.choice == 2)||(myInsulation.choice == 4))
     {
-        outputText = "cost data not available for " + myInsulation.insulationNames[myInsulation.choice];
+        outputText = "no data for " + myInsulation.insulationNames[myInsulation.choice];
     }
     else
     {
         myInsulation.calculateTotalCost();
         //outputText = "$ "+ myInsulation.totalCost.toFixed(0);
-        outputText = myInsulation.totalCost.toLocaleString("en-US", {style: "currency", currency: "USD", minimumFractionDigits: 0, maximumFractionDigits: 0}) 
+        outputText = myInsulation.totalCost.toLocaleString("en-US", {style: "decimal", minimumFractionDigits: 0, maximumFractionDigits: 0}) 
     }
-    document.getElementById('insulationCostDynamic').innerHTML=outputText;
+    document.getElementById('insulationExpenseDynamic').innerHTML=outputText;
 }
 
 
 function displayOverage(context, percent)
 {
     context.save();
-        var excessCapacity = (percent-120)*1000;
+        var excessCapacity = (percent-120);
         excessCapacity = Math.round(excessCapacity);
         //excessCapacity = excessCapacity/10;
         
-        textString = "Excess = ";
-        textString += excessCapacity;
-        textString += " houses"; 
-        context.font = "14px Rockwell";
+        
+        var xStart = 455;
+        var yStart = 370;
+        var width = 205;
+        var height = 25;
+        var lineW = 2;
+        var xText = xStart + 5;
+        var yText = yStart + 17;
+        
+        context.lineWidth = lineW;
+        context.strokeRect(xStart,yStart,width,height);
         context.fillStyle = "#F4F400";
-        context.fillText(textString, 472, 120);
+        context.fillRect(xStart+lineW, yStart+lineW, width-(2*lineW), height-(2*lineW));
+        
+        
+        textString = "+";
+        textString += excessCapacity;
+        textString += " (x1000) additional houses"; 
+        context.font = "14px Rockwell";
+        //context.fillStyle = "#F4F400";
+        //context.fillText(textString, xText, yText);
         context.fillStyle = "#000000";
-        context.fillText(textString, 473, 121);
+        context.fillText(textString, xText, yText);
+    context.restore();   
+}
+
+function displayGroundTemp (context, percent)
+{
+    var xStart = 210;
+    var yStart = 265;
+    var width = 85;
+    var height = 40;
+    var lineW = 1;
+    var xText = xStart + 2;
+    var yText = yStart + 14;
+    
+    var groundTemp = 55*(1-percent)+70;
+    
+    context.save();
+        textString1 = "...ground temp";
+        textString2 = groundTemp.toFixed(0);
+        textString2 += " degrees"; 
+        context.font = "10px Rockwell";
+        context.fillStyle = "#00BD5C";
+        //context.fillText(textString, 472, 425);
+        
+        context.lineWidth = lineW;
+        context.strokeRect(xStart,yStart,width,height);
+        context.fillStyle = "rgba(207,181,59,1)";
+        context.fillRect(xStart+lineW, yStart+lineW, width-(2*lineW), height-(2*lineW));
+        
+        context.fillStyle = "#003313";
+        context.fillText(textString1, xText,yText);
+        context.font = "12px Rockwell";
+        context.fillText(textString2, xText,yText+16);
+        
     context.restore();
     
 }
+
 
 function displayPercent(context, percent, randomMode)
 {
     if (randomMode)
         percent = Math.random();
+    
     percent = Math.round(percent*1000);
     percent = percent/10;
+    
+    var xStart = 250;
+    var yStart = 405;
+    var width = 182;
+    var height = 25;
+    var lineW = 2;
+    var xText = xStart + 5;
+    var yText = yStart + 17;
+    
     context.save();
         textString = "Generator Capacity ";
         textString += percent;
         textString += "%"; 
         context.font = "14px Rockwell";
         context.fillStyle = "#00BD5C";
-        context.fillText(textString, 472, 425);
+        //context.fillText(textString, 472, 425);
+        
+        context.lineWidth = lineW;
+        context.strokeRect(xStart,yStart,width,height);
+        context.fillStyle = "rgba(207,181,59,1)";
+        context.fillRect(xStart+lineW, yStart+lineW, width-(2*lineW), height-(2*lineW));
+        
+        context.fillText(textString, xText, yText);
         context.fillStyle = "#003313";
-        context.fillText(textString, 473, 426);
+        //context.fillText(textString, 473, 426);
+        context.fillText(textString, xText+1,yText+1);
         
     context.restore();
 };
@@ -135,7 +210,7 @@ function disableStuff()
                 $( "#capacityPicker").attr('disabled', 'disabled');    
                 
                 
-                document.getElementById('calculateCost').disabled=true;
+                //document.getElementById('calculateExpense').disabled=true;
                 document.getElementById('clearTable').disabled=true;
                 //document.getElementById('velocityGraph').disabled=true;
                 //document.getElementById('forceGraph').disabled=true;
@@ -162,12 +237,12 @@ function enableStuff(myFlags)
                 $( "#thicknessPicker1").removeAttr('disabled');   
                 $( "#thicknessPicker2").removeAttr('disabled');   
                 $( "#capacityPicker").removeAttr('disabled');   
-                $( "#calculateCost").removeAttr('disabled');   
+                $( "#calculateExpense").removeAttr('disabled');   
 
                 
                 
                 document.getElementById('clearTable').disabled=false;  
-                //document.getElementById('calculateCost').disabled=false;  
+                //document.getElementById('calculateExpense').disabled=false;  
                 //  
                 //document.getElementById('velocityGraph').disabled=false;                
                // if(myFlags.wreckageFlag)

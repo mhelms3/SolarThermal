@@ -52,7 +52,7 @@ insulation.prototype.calculateTotalCost = function()
     r = this.thickness;
     k = this.cost[1][this.choice];
     //this.totalCost = (400 + (Math.PI*k*(r*r+(r*20))))*1000;
-    this.totalCost = (400 + (3.14*k*(r*r+(r*20))))*1000;
+    this.totalCost = (400 + (3.14*k*(r*r+(r*20))))*1000000;
     //console.log("Radius:"+ r +"  Insulation Cost:"+k + "  Total Cost"+ this.totalCost);    
 };
 
@@ -70,14 +70,14 @@ insulation.prototype.initR_values = function()
 
 insulation.prototype.getChoice = function()
 {
-    console.log("Insulation Choice="+this.choice+" Thickness="+this.thickness);
+    //console.log("Insulation Choice="+this.choice+" Thickness="+this.thickness);
     this.choice =  document.getElementById('insulationPicker').value;
 };  
 
 insulation.prototype.getThickness = function(thicknessOpt)
 {
     
-    console.log("Insulation Choice="+this.choice+" Thickness="+this.thickness);
+    //console.log("Insulation Choice="+this.choice+" Thickness="+this.thickness);
     
     if (thicknessOpt>0)
     {
@@ -133,7 +133,7 @@ insulation.prototype.calculateHeatRetained = function()
     //THIS CAPS HEAT RETAINED AT 100% -- nothing should really reach this, but this was added because of the changes to make everything linear for 1-5" of insulation.
     if (heatRetained>1)
     {
-        console.log("Heat retained greater than 100%: " + heatRetained);
+        //console.log("Heat retained greater than 100%: " + heatRetained);
         heatRetained = 1;
     }
         
@@ -158,9 +158,9 @@ insulation.prototype.drawInsulation = function(context)
 {
     
         var thick = this.thickness;
-        console.log("Thickness ="+this.thickness);
+        //console.log("Thickness ="+this.thickness);
         var color = this.colors[this.choice];
-        console.log("Colors #"+this.choice+" Color="+color);
+        //console.log("Colors #"+this.choice+" Color="+color);
         
         var splitThick = Math.floor(thick/2);
     

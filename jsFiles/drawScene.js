@@ -31,7 +31,8 @@ function initialScreen (context, screen)
  {
      context.save();
         //context.drawImage(screen.controlPanelImage, screen.lightArrayLeft-15, screen.lightArrayTop-35, 245, 335);
-        context.drawImage(screen.controlPanelImage, screen.lightArrayLeft-15, screen.lightArrayTop-80, 245, 380);
+        //context.drawImage(screen.controlPanelImage, screen.lightArrayLeft-15, screen.lightArrayTop-80, 245, 380);
+        context.drawImage(screen.controlPanelImage, screen.controlPanelLeft, screen.controlPanelTop, 245, 380);
         context.fillStyle = "#00BD5C";
         context.font = "16px Rockwell";
         context.fillText("Houses Powered(x1000)", screen.lightArrayLeft+18, screen.lightArrayTop-5);
@@ -41,8 +42,18 @@ function initialScreen (context, screen)
         //context.fillText("Excess Capacity(kWH)", screen.lightArrayLeft+34, screen.lightArrayTop-40);
      context.restore();
  }
- 
- function drawBackground(context, screen, myFlags)
+
+function displayBaselineTemperature (context)
+{
+    textString = "Today's temperature: 70 degrees Farenheit";
+    context.save();
+        context.font = "14px Rockwell";
+        context.fillStyle = "#000000";
+        context.fillText(textString, 20, 25);
+    context.restore();
+}
+
+function drawBackground(context, screen, myFlags)
 {
     var imageNumber;
     context.save();
@@ -53,9 +64,17 @@ function initialScreen (context, screen)
         else
             imageNumber = 0;
         context.drawImage(screen.backGroundImage[imageNumber], 10, 10, screen.boxWidth-15, screen.boxHeight-15);  
+        context.drawImage(screen.workerImage, 160,250);
+        //if(imageNumber == 1)
+        //    context.drawImage(screen.temperatureBarImage,300,290, 10, 80);
+        
         manageBlades(context, screen);
         drawPowerBoard(context, screen);
+        
     context.restore();
+    displayBaselineTemperature(context);
+    
+    
 }
 
 
@@ -103,6 +122,7 @@ function lightBulb(context, screen, row, column, state)
     }
 }
 
+
 function manageChevrons(context, screen, timeSteps)
 {
     var thisImageMod = timeSteps%3;
@@ -116,7 +136,10 @@ function manageChevrons(context, screen, timeSteps)
     {
         chevronPosX = 9*i+120;
         chevronImageSelect = (i+(3-thisImageMod))%3;
-        context.drawImage(screen.chevronImages[chevronImageSelect], chevronPosX, 373, 10, 10);
+        //context.drawImage(screen.chevronImages[chevronImageSelect], chevronPosX, 373, 10, 10);
+        //context.putImageData(chev[chevronImageSelect], chevronPosX, 373, 10, 10);
+        //context.putImageData(chev[chevronImageSelect], chevronPosX, 373);
+        context.putImageData(screen.newChevrons[chevronImageSelect], chevronPosX, 373);
     }
 }
 
@@ -215,6 +238,8 @@ function beginAnimation (context, screen, timeSteps, percent, insulation, myFlag
             else
             {
                 displayPercent(context, myFlags.genPercent, false);
+                if(myFlags.showInsulation)
+                    displayGroundTemp(context, myFlags.genPercent);
                 if(percent>120)
                     displayOverage(context, percent);
             }

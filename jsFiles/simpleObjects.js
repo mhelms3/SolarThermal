@@ -14,7 +14,9 @@ var screenObject = function(bh, bw){
         
         this.delay = 50;
         
-        this.lightArrayTop = 150;
+        this.controlPanelTop = 60;
+        this.controlPanelLeft = 434;
+        this.lightArrayTop = 100;
         this.lightArrayLeft = 450;
         this.lightBulbSize = 18;
         this.lightBulbSpacing = 22;
@@ -27,6 +29,15 @@ var screenObject = function(bh, bw){
         this.bladeMaxSpeed = 0;
         
         this.chevronCount = 0;
+        
+    
+        this.workerImage = new Image();
+        this.workerImage.src = "imageFiles/WorkerImage3.png";
+        
+        
+        this.temperatureBarImage = new Image();
+        this.temperatureBarImage.src = "imageFiles/TempGradient.png";
+        
         
         this.houseDarkImage = new Image();
         //this.houseDarkImage.src = "imageFiles/LED-OFF3.png";
@@ -51,33 +62,95 @@ var screenObject = function(bh, bw){
         
         
         this.controlPanelImage = new Image();
-        this.controlPanelImage.src = "imageFiles/READOUTBOARD.png"
+        this.controlPanelImage.src = "imageFiles/READOUTBOARD.png";
         
-        this.chevronImages = []
+        this.chevronImages = [];
         this.chevronImages[0] = new Image ();
         this.chevronImages[1] = new Image ();
         this.chevronImages[2] = new Image ();
         this.chevronImages[0].src = "imageFiles/HeatChevron2.png";
         this.chevronImages[1].src = "imageFiles/HeatChevron3.png";
         this.chevronImages[2].src = "imageFiles/HeatChevron1.png";
-        
-        this.temperatureBarImage = new Image();
-        this.temperatureBarImage.src = "imageFiles/TempGradient.png";
-                
+        this.newChevrons = [];
+
         this.backGroundImage = [];
         this.backGroundImage[0] = new Image();
         this.backGroundImage[0].src = "imageFiles/STATIC-BACKGROUND-NOSUN.png";
         this.backGroundImage[1] = new Image();
         this.backGroundImage[1].src = "imageFiles/STATIC-BACKGROUND.png";
-        
-
-        
         this.altLabel = "";
      };
      
+screenObject.prototype.updateChevrons = function(temp)
+{
+    var offScreenCanvas = document.getElementById('offScreenCanvas');
+    var offScreenContext = offScreenCanvas.getContext('2d');  
+    var chevOld = [];
+    
+    var chevBase = [255, 20, 0, 255, 0, 20, 255, 106, 0];
+    var chevMid = [200, 80, 125, 255, 0, 110, 255, 130, 230];
+    var chevEnd = [157, 21, 255, 160, 0, 200, 40, 106, 235];
+    
+    var reds = [];
+    var greens = [];
+    var blues = [];
+    
+    if(temp>.40)
+    {
+        range = 1-(temp-.40)/.57;
+        for (icolor=0; icolor<3;icolor++)
+        {
+            ci = icolor*3;
+            reds[icolor] = chevBase[ci]-(chevBase[ci]-chevMid[ci])*range;
+            greens[icolor] = chevBase[ci+1]-(chevBase[ci+1]-chevMid[ci+1])*range;
+            blues[icolor] = chevBase[ci+2]-(chevBase[ci+2]-chevMid[ci+2])*range;
+        }
+    }
+    else
+    {
+    range = 1-(temp-.10)/.30;
+        for (icolor=0; icolor<3;icolor++)
+        {
+            ci = icolor*3;
+            reds[icolor] = chevMid[ci]-(chevMid[ci]-chevEnd[ci])*range;
+            greens[icolor] = chevMid[ci+1]-(chevMid[ci+1]-chevEnd[ci+1])*range;
+            blues[icolor] = chevMid[ci+2]-(chevMid[ci+2]-chevEnd[ci+2])*range;
+        }
+    }
+        
+        
+        
+    for(var k = 0; k<3; k++)
+    {
+        offScreenContext.drawImage(this.chevronImages[k],0,0,10,10);  
+        chevOld[k] = offScreenContext.getImageData(0,0,10,10);
+        offScreenContext.clearRect(0,0,20,20);
+
+        for (var i=0;i<this.newChevrons[k].data.length;i+=4)
+            {
+                if(chevOld[k].data[i]>200)
+                {
+                    this.newChevrons[k].data[i+0]=reds[k];
+                    this.newChevrons[k].data[i+1]=greens[k];
+                    this.newChevrons[k].data[i+2]=blues[k];
+                    this.newChevrons[k].data[i+3]=255;
+                    //console.log("Old#"+k+":  "+chevOld[k].data[i]+" "+chevOld[k].data[i+1]+" "+chevOld[k].data[i+2]);
+                    //console.log("New:"+temp+"%  "+this.newChevrons[k].data[i]+" "+this.newChevrons[k].data[i+1]+" "+this.newChevrons[k].data[i+2]);
+                }
+                else
+                {
+                    this.newChevrons[k].data[i+0]=0;
+                    this.newChevrons[k].data[i+1]=0;
+                    this.newChevrons[k].data[i+2]=125;
+                    this.newChevrons[k].data[i+3]=125;
+                    
+                }
+            }
+        }
+};
 screenObject.prototype.setMaxSpeed = function(percent)
 {
-    console.log("%"+percent);
+    //console.log("%"+percent);
     var factor = 1+percent/100;
     
     this.bladeMaxSpeed = (percent * Math.PI *factor*factor*factor)/60000;
@@ -110,7 +183,8 @@ screenObject.prototype.resetBlades = function()
 };
 
 var flags = function(){
-    this.passcode = 0;
+    //this.passcode = 0;
+    this.passcode = 4;
     this.displayRightFlag = false;
     this.showInsulation = false;
     this.animationFlag = false;
